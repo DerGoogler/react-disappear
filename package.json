@@ -1,6 +1,6 @@
 {
   "name": "react-disappear",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Detects if the inner children are visible",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -30,6 +30,7 @@
     "url": "https://github.com/DerGoogler/react-disappear"
   },
   "author": "Der_Googler",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/DerGoogler/react-disappear/issues"
   },

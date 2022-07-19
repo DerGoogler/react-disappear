@@ -23,7 +23,14 @@
   "keywords": [
     "visible",
     "react",
-    "typescript"
+    "typescript",
+    "intersection",
+    "observer",
+    "visible",
+    "invisible",
+    "visibility",
+    "on screen",
+    "intersection observer"
   ],
   "repository": {
     "type": "git",

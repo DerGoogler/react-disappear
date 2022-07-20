@@ -1,6 +1,6 @@
 {
   "name": "react-disappear",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "Detects if the inner children are visible",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -23,13 +23,21 @@
   "keywords": [
     "visible",
     "react",
-    "typescript"
+    "typescript",
+    "intersection",
+    "observer",
+    "visible",
+    "invisible",
+    "visibility",
+    "on screen",
+    "intersection observer"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/DerGoogler/react-disappear"
   },
   "author": "Der_Googler",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/DerGoogler/react-disappear/issues"
   },

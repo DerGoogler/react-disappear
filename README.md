@@ -1,6 +1,6 @@
 # React Disappear
 
-I wanted to give this library the name `react-visible`, but it is taken for an useless component. So bake to the main! This component detects if the inner children are visible or not. With `onDisappear: (visible: boolean) => void;` can you get the current visible state
+I wanted to give this library the name `react-visible`, but it is taken for an useless component. So back to the main! This component detects if the inner children are visible or not. With `onDisappear: (visible: boolean) => void;` can you get the current visible state
 
 ## Install
 

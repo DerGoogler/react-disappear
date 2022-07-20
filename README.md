@@ -24,6 +24,8 @@ This library inludes to types of component
 
 ### Class Component
 
+> Class Component requires an wrapper
+
 ```tsx
 import { Disappear } from "react-disappear";
 import { dom } from "googlers-tools";
@@ -32,6 +34,7 @@ function App() {
   return (
     <div>
       <Disappear
+        wrapper="div"
         onDisappear={visible => {
           console.log(visible);
         }}

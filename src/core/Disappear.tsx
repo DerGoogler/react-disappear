@@ -1,17 +1,39 @@
 import * as React from "react";
 
-interface DisappearProps {
+interface DisappearProps<T = HTMLElement> {
   children: React.ReactNode;
   style?: React.CSSProperties;
   className?: string;
+  /**
+   * @return The current state of the disappear component
+   */
   onDisappear: (visible: boolean) => void;
+  /**
+   * Used to wrap the inner children
+   */
   wrapper: keyof JSX.IntrinsicElements;
+  onClick?: React.MouseEventHandler<T> | undefined;
+  onDoubleClick?: React.MouseEventHandler<T> | undefined;
 }
 
 /**
  * Checks if the children are visible.
  * @required Wrapper
  * @extends {React.Component<Element>}
+ * @example
+ * ```tsx
+ * <Disappear
+ *   wrapper="span"
+ *   onDisappear={(visible) => {
+ *     this.setState({
+ *       appToolbarTitle: !visible,
+ *     });
+ *   }}
+ *   style={{ display: "inline-flex", fontSize: "23px", width: "100%" }}
+ *  >
+ *    {name}
+ * </Disappear>
+ * ```
  */
 class Disappear extends React.Component<DisappearProps> {
   private observer: IntersectionObserver;
@@ -36,8 +58,19 @@ class Disappear extends React.Component<DisappearProps> {
   }
 
   public render(): React.ReactNode {
-    const { style, className, children, wrapper } = this.props;
-    return React.createElement(wrapper, { ref: this.ref, style: style, className: className, key: "disappear-outer" }, children);
+    const { style, className, children, wrapper, onClick, onDoubleClick } = this.props;
+    return React.createElement(
+      wrapper,
+      {
+        ref: this.ref,
+        style: style,
+        className: className,
+        key: "disappear-outer",
+        onClick: onClick,
+        onDoubleClick: onDoubleClick,
+      },
+      children
+    );
   }
 }
 

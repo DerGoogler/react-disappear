@@ -1,3 +1,4 @@
+import { JR } from "googlers-tools";
 import * as React from "react";
 
 interface DisappearProps<T = HTMLElement> {
@@ -19,7 +20,7 @@ interface DisappearProps<T = HTMLElement> {
 /**
  * Checks if the children are visible.
  * @required Wrapper
- * @extends {React.Component<Element>}
+ * @extends {JR.Component<Element>}
  * @example
  * ```tsx
  * <Disappear
@@ -35,7 +36,7 @@ interface DisappearProps<T = HTMLElement> {
  * </Disappear>
  * ```
  */
-class Disappear extends React.Component<DisappearProps> {
+class Disappear extends JR.Component<DisappearProps> {
   private observer: IntersectionObserver;
   private ref: React.RefObject<Element>;
 
@@ -57,20 +58,21 @@ class Disappear extends React.Component<DisappearProps> {
     this.observer.disconnect();
   }
 
-  public render(): React.ReactNode {
+  public jrender(): JR.JRNode[] {
     const { style, className, children, wrapper, onClick, onDoubleClick } = this.props;
-    return React.createElement(
-      wrapper,
+    return [
       {
-        ref: this.ref,
-        style: style,
-        className: className,
-        key: "disappear-outer",
-        onClick: onClick,
-        onDoubleClick: onDoubleClick,
+        [wrapper]: {
+          ref: this.ref,
+          style: style,
+          className: className,
+          key: "disappear-outer",
+          onClick: onClick,
+          onDoubleClick: onDoubleClick,
+          children: children,
+        },
       },
-      children
-    );
+    ];
   }
 }
 

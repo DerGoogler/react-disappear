@@ -1,4 +1,4 @@
-import { JR } from "googlers-tools";
+import { JR } from "jrgt";
 import * as React from "react";
 
 interface DisappearProps<T = HTMLElement> {

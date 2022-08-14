@@ -1,6 +1,6 @@
 {
   "name": "react-disappear",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "Detects if the inner children are visible",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -55,7 +55,7 @@
     "/dist"
   ],
   "dependencies": {
-    "googlers-tools": "^1.4.0",
+    "googlers-tools": "^1.4.2",
     "react": "^18.2.0"
   }
 }

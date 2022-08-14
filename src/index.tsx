@@ -1,20 +1,20 @@
-import { bool, doc, str, Undefineable } from "googlers-tools";
+import { doc, Util } from "googlers-tools";
 import * as React from "react";
 
 interface DisappearProps<T = HTMLElement> {
   children: React.ReactNode;
-  style?: Undefineable<React.CSSProperties>;
-  className?: str;
+  style?: Util.Undefineable<React.CSSProperties>;
+  className?: string;
   /**
    * @return The current state of the disappear component
    */
-  onDisappear: (visible: bool) => void;
+  onDisappear: (visible: boolean) => void;
   /**
    * Used to wrap the inner children
    */
   wrapper: keyof JSX.IntrinsicElements;
-  onClick?: Undefineable<React.MouseEventHandler<T>>;
-  onDoubleClick?: Undefineable<React.MouseEventHandler<T>>;
+  onClick?: Util.Undefineable<React.MouseEventHandler<T>>;
+  onDoubleClick?: Util.Undefineable<React.MouseEventHandler<T>>;
 }
 
 /**

@@ -18,17 +18,13 @@ bun add react-disappear
 npm add --save-dev tslib
 ```
 
-## Class or Function?
-
-This library inludes to types of component
-
-### Class Component
+### How to use
 
 > Class Component requires an wrapper
 
 ```tsx
 import { Disappear } from "react-disappear";
-import { dom } from "googlers-tools";
+import { rct, print } from "googlers-tools";
 
 function App() {
   return (
@@ -36,7 +32,7 @@ function App() {
       <Disappear
         wrapper="div"
         onDisappear={visible => {
-          console.log(visible);
+          print.out(visible);
         }}
       >
         <span>Content</span>
@@ -49,32 +45,5 @@ function App() {
   );
 }
 
-dom.renderAuto(App);
-```
-
-### Function Component
-
-```tsx
-import { Disappear } from "react-disappear";
-import { dom } from "googlers-tools";
-
-function App() {
-  return (
-    <div>
-      <DisappearFunc
-        onDisappear={visible => {
-          console.log(visible);
-        }}
-      >
-        <span>Content</span>
-        <span>Content</span>
-        <span>Content</span>
-        <span>Content</span>
-        <span>Content</span>
-      </DisappearFunc>
-    </div>
-  );
-}
-
-dom.renderAuto(App);
+rct.renderAuto(App);
 ```

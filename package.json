@@ -34,14 +34,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://dergoogler.com/Der_Googler/react-disappear"
+    "url": "https://github.com/DerGoogler/react-disappear"
   },
   "author": "Der_Googler",
   "license": "MIT",
   "bugs": {
-    "url": "https://dergoogler.com/Der_Googler/react-disappear/issues"
+    "url": "https://github.com/DerGoogler/react-disappear/issues"
   },
-  "homepage": "https://dergoogler.com/Der_Googler/react-disappear#README",
+  "homepage": "https://github.com/DerGoogler/react-disappear#README",
   "devDependencies": {
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",

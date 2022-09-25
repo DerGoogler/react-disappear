@@ -1,7 +1,7 @@
 import { doc, Util } from "googlers-tools";
 import * as React from "react";
 
-interface DisappearProps<T = HTMLElement> {
+interface DisappearProps<C extends React.ComponentType<any>> {
   children: React.ReactNode;
   style?: Util.Undefineable<React.CSSProperties>;
   className?: string;
@@ -12,9 +12,8 @@ interface DisappearProps<T = HTMLElement> {
   /**
    * Used to wrap the inner children
    */
-  wrapper: keyof JSX.IntrinsicElements;
-  onClick?: Util.Undefineable<React.MouseEventHandler<T>>;
-  onDoubleClick?: Util.Undefineable<React.MouseEventHandler<T>>;
+  wrapper: C | keyof JSX.IntrinsicElements;
+  wrapperProps?: Partial<React.ComponentProps<C>>;
 }
 
 /**
@@ -22,11 +21,11 @@ interface DisappearProps<T = HTMLElement> {
  * @required Wrapper
  * @extends {React.Component<DisappearProps>}
  */
-class Disappear extends React.Component<DisappearProps> {
+class Disappear<C extends React.ComponentType<any>> extends React.Component<DisappearProps<C>> {
   private observer: IntersectionObserver;
   private ref: React.RefObject<Element>;
 
-  public constructor(props: Readonly<DisappearProps>) {
+  public constructor(props: Readonly<DisappearProps<C>>) {
     super(props);
     this.ref = React.createRef<Element>();
     this.observer = new IntersectionObserver(([entry]) => {
@@ -45,8 +44,17 @@ class Disappear extends React.Component<DisappearProps> {
   }
 
   public render(): React.ReactNode {
-    const { style, className, children, wrapper, onClick, onDoubleClick } = this.props;
-    return React.createElement(wrapper, { ref: this.ref, style: style, className: className, onClick: onClick, onDoubleClick: onDoubleClick }, children);
+    const { children, className, style, wrapper, wrapperProps } = this.props;
+    return React.createElement(
+      wrapper,
+      {
+        ref: this.ref,
+        className: className,
+        style: style,
+        ...wrapperProps,
+      },
+      children
+    );
   }
 }
 

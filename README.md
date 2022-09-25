@@ -34,6 +34,11 @@ function App() {
         onDisappear={visible => {
           print.out(visible);
         }}
+        wrapperProps={{
+          style: {
+            backgroundColor: "#fff",
+          },
+        }}
       >
         <span>Content</span>
         <span>Content</span>

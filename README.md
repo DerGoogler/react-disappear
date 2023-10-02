@@ -24,22 +24,16 @@ npm add --save-dev tslib
 
 ```tsx
 import { Disappear } from "react-disappear";
-import { rct, print } from "googlers-tools";
 
 function App() {
   return (
     <div>
       <Disappear
-        wrapper="div"
-        onDisappear={visible => {
-          print.out(visible);
+        as={"div"} // or custom components
+        onDisappear={(state, ref) => {
+          console.log(state);
         }}
-        wrapperProps={{
-          style: {
-            backgroundColor: "#fff",
-          },
-        }}
-      >
+        style={{ backgroundColor: "#fff" }}>
         <span>Content</span>
         <span>Content</span>
         <span>Content</span>

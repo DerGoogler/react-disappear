@@ -1,61 +1,44 @@
-import { doc, Util } from "googlers-tools";
 import * as React from "react";
+import { useEffect, useMemo, useRef } from "react";
 
-interface DisappearProps<C extends React.ComponentType<any>> {
-  children: React.ReactNode;
-  style?: Util.Undefineable<React.CSSProperties>;
-  className?: string;
+export interface DisappearProps<T extends React.ElementType> {
+  readonly as?: T;
+  readonly children: React.ReactNode;
   /**
    * @return The current state of the disappear component
    */
-  onDisappear: (visible: boolean) => void;
-  /**
-   * Used to wrap the inner children
-   */
-  wrapper: C | keyof JSX.IntrinsicElements;
-  wrapperProps?: Partial<React.ComponentProps<C>>;
+  onDisappear(visible: boolean, ref?: React.MutableRefObject<T | null>): void;
 }
+
+export type DisappearType<T extends React.ElementType> = DisappearProps<T> & Omit<React.ComponentPropsWithoutRef<T>, keyof DisappearProps<T>>;
 
 /**
  * Checks if the children are visible.
- * @required Wrapper
- * @extends {React.Component<DisappearProps>}
+ * @required onChange
  */
-class Disappear<C extends React.ComponentType<any>> extends React.Component<DisappearProps<C>> {
-  private observer: IntersectionObserver;
-  private ref: React.RefObject<Element>;
+export function Disappear<T extends React.ElementType = "div">(props: DisappearType<T>) {
+  const { as, ...rest } = props;
 
-  public constructor(props: Readonly<DisappearProps<C>>) {
-    super(props);
-    this.ref = React.createRef<Element>();
-    this.observer = new IntersectionObserver(([entry]) => {
-      props.onDisappear(entry.isIntersecting);
-    });
-  }
+  const ref = useRef<T | null>(null);
 
-  public componentDidMount() {
-    doc.findRef<Element>(this.ref, ref => {
-      this.observer.observe(ref);
-    });
-  }
+  const observer = useMemo(
+    () =>
+      new IntersectionObserver(([entry]) => {
+        props.onDisappear(entry.isIntersecting, ref);
+      }),
+    [as]
+  );
 
-  public componentWillUnmount() {
-    this.observer.disconnect();
-  }
+  useEffect(() => {
+    if (ref.current) {
+      observer.observe(ref.current as any);
+    }
 
-  public render(): React.ReactNode {
-    const { children, className, style, wrapper, wrapperProps } = this.props;
-    return React.createElement(
-      wrapper,
-      {
-        ref: this.ref,
-        className: className,
-        style: style,
-        ...wrapperProps,
-      },
-      children
-    );
-  }
+    return () => {
+      observer.disconnect();
+    };
+  }, [as, observer]);
+
+  const Component = as || "div";
+  return <Component ref={ref as any} {...rest} />;
 }
-
-export { Disappear, DisappearProps };
